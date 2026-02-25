@@ -1,0 +1,563 @@
+/* ===== ОБНУЛЕНИЕ ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== ОСНОВНЫЕ ЦВЕТА ===== */
+:root {
+    --primary: #6B2E3A;        /* Бордовый */
+    --secondary: #2C1E1A;      /* Тёмный шоколад */
+    --background: #F5F0E7;      /* Бежевый */
+    --light: #F8F4ED;           /* Светлый */
+    --dark: #1A1A1A;            /* Почти чёрный */
+    --gold: #C6A15B;            /* Золотой акцент */
+    --gradient: linear-gradient(135deg, #6B2E3A 0%, #2C1E1A 100%);
+}
+
+/* ===== БАЗОВЫЙ СТИЛЬ ===== */
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    background-color: var(--background);
+    color: var(--secondary);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+    animation: fadeIn 1s ease;
+}
+
+/* ===== ШРИФТЫ ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap');
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* ===== КОНТЕЙНЕР ===== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== ХЕДЕР ===== */
+header {
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(44, 30, 26, 0.1);
+    background: rgba(245, 240, 231, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    animation: slideDown 0.8s ease-out;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: var(--secondary);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.logo:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.logo span {
+    font-weight: 300;
+    font-size: 16px;
+    margin-left: 10px;
+    letter-spacing: 1px;
+    color: var(--primary);
+}
+
+/* ===== НАВИГАЦИЯ ===== */
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--secondary);
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient);
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+nav a:hover::before {
+    width: 100%;
+}
+
+/* ===== КНОПКИ ===== */
+.btn {
+    display: inline-block;
+    padding: 14px 35px;
+    background: transparent;
+    border: 2px solid var(--secondary);
+    color: var(--secondary);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: var(--gradient);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+
+.btn:hover {
+    color: var(--light);
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(107, 46, 58, 0.3);
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: var(--gradient);
+    border-color: transparent;
+    color: var(--light);
+}
+
+.btn-primary::before {
+    background: var(--secondary);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 15px 30px rgba(44, 30, 26, 0.4);
+}
+
+/* ===== АНИМАЦИИ ===== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ===== ПРИМЕНЕНИЕ АНИМАЦИЙ ===== */
+section {
+    animation: slideUp 1s ease-out;
+}
+
+h1, h2, h3 {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+p {
+    animation: slideInRight 0.8s ease-out;
+}
+
+/* ===== КАРТОЧКИ ТОВАРОВ ===== */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px;
+    margin: 60px 0;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.2s forwards;
+}
+
+.product-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: scaleIn 0.8s ease-out;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 30px 50px rgba(107, 46, 58, 0.2);
+}
+
+.product-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.product-card img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.product-card h3 {
+    font-size: 20px;
+    margin: 20px 20px 10px;
+    font-weight: 400;
+}
+
+.product-color {
+    color: var(--primary);
+    text-transform: uppercase;
+    font-size: 14px;
+    margin: 0 20px 5px;
+}
+
+.price {
+    font-size: 18px;
+    color: var(--primary);
+    margin: 0 20px 20px;
+    font-weight: 500;
+}
+
+/* ===== СТРАНИЦА ТОВАРА ===== */
+.product-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin: 60px 0;
+    animation: slideUp 1s ease-out;
+}
+
+.product-gallery {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.product-gallery img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.8s ease;
+}
+
+.product-gallery:hover img {
+    transform: scale(1.02);
+}
+
+.product-info {
+    animation: slideInRight 0.8s ease-out;
+}
+
+.product-info h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: var(--secondary);
+}
+
+.product-price {
+    font-size: 28px;
+    color: var(--primary);
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.product-meta {
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-top: 2px solid rgba(107, 46, 58, 0.1);
+    border-bottom: 2px solid rgba(107, 46, 58, 0.1);
+}
+
+.meta-item {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.meta-label {
+    width: 100px;
+    font-weight: 500;
+    color: var(--primary);
+}
+
+.meta-value {
+    flex: 1;
+}
+
+/* ===== РАЗМЕРНАЯ СЕТКА ===== */
+.size-selector {
+    margin: 30px 0;
+}
+
+.size-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.size-btn {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--secondary);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.size-btn:hover,
+.size-btn.active {
+    background: var(--gradient);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(107, 46, 58, 0.3);
+}
+
+/* ===== КНОПКА ПОМОЩИ ===== */
+.help-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    box-shadow: 0 4px 20px rgba(107, 46, 58, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    animation: float 3s infinite ease-in-out;
+}
+
+.help-button:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 30px rgba(107, 46, 58, 0.6);
+}
+
+.help-button span {
+    position: absolute;
+    right: 70px;
+    background: var(--gradient);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.help-button:hover span {
+    opacity: 1;
+}
+
+/* ===== ПОДВАЛ ===== */
+footer {
+    margin-top: 100px;
+    padding: 60px 0;
+    background: linear-gradient(to bottom, transparent, rgba(107, 46, 58, 0.05));
+    border-top: 1px solid rgba(107, 46, 58, 0.1);
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px 0;
+}
+
+.footer-links a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* ===== ЭФФЕКТЫ ===== */
+.hover-zoom {
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.hover-zoom img {
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hover-zoom:hover img {
+    transform: scale(1.05);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-color: rgba(107, 46, 58, 0.3);
+}
+
+/* ===== АДАПТАЦИЯ ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    .header-inner {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    nav ul {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-detail {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 20px;
+    }
+  }
