@@ -15,11 +15,13 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# ГЛАВНАЯ
 @app.route('/')
 def index():
     products = Product.query.filter_by(is_new=True).limit(4).all()
     return render_template('index.html', products=products)
 
+# КАТАЛОГ
 @app.route('/catalog')
 def catalog():
     category = request.args.get('category', 'all')
@@ -29,29 +31,37 @@ def catalog():
         products = Product.query.filter_by(category=category).all()
     return render_template('catalog.html', products=products, current_category=category)
 
+# СТРАНИЦА ТОВАРА — ИСПРАВЛЕНО
 @app.route('/product/<slug>')
 def product(slug):
-    product = Product.query.filter_by(slug=slug).first_or_404()
+    product = Product.query.filter_by(slug=slug).first()
+    if product is None:
+        return "Товар не найден", 404
     return render_template('product.html', product=product)
 
+# MANUAL
 @app.route('/manual')
 def manual():
     return render_template('manual.html')
 
+# ABOUT
 @app.route('/about')
 def about():
     return render_template('about.html')
 
+# DELIVERY
 @app.route('/delivery')
 def delivery():
     return render_template('delivery.html')
 
+# АДМИНКА
 @app.route('/admin')
 def admin_dashboard():
     products = Product.query.all()
     orders = Order.query.all()
     return render_template('admin/dashboard.html', products=products, orders=orders)
 
+# ДОБАВЛЕНИЕ ТОВАРА
 @app.route('/admin/product/new', methods=['GET', 'POST'])
 def admin_product_new():
     if request.method == 'POST':
@@ -87,6 +97,7 @@ def admin_product_new():
 
     return render_template('admin/product_form.html')
 
+# РЕДАКТИРОВАНИЕ ТОВАРА
 @app.route('/admin/product/edit/<int:product_id>', methods=['GET', 'POST'])
 def admin_product_edit(product_id):
     product = Product.query.get_or_404(product_id)
@@ -112,6 +123,7 @@ def admin_product_edit(product_id):
 
     return render_template('admin/product_form.html', product=product)
 
+# УДАЛЕНИЕ ТОВАРА
 @app.route('/admin/product/delete/<int:product_id>', methods=['POST'])
 def admin_product_delete(product_id):
     product = Product.query.get_or_404(product_id)
@@ -119,10 +131,12 @@ def admin_product_delete(product_id):
     db.session.commit()
     return redirect(url_for('admin_dashboard'))
 
+# ЗАГРУЗКА ФАЙЛОВ
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+# КРИПТОПЛАТЕЖ (ЗАГОТОВКА)
 @app.route('/create-crypto-payment', methods=['POST'])
 def create_crypto_payment():
     data = request.json
@@ -134,6 +148,7 @@ def create_crypto_payment():
         'currency': 'USDT'
     })
 
+# ПЛАТЕЖ КАРТОЙ (ЗАГОТОВКА)
 @app.route('/create-card-payment', methods=['POST'])
 def create_card_payment():
     data = request.json
@@ -143,22 +158,24 @@ def create_card_payment():
         'checkout_url': f'https://crossmint.com/checkout/{product.id}'
     })
 
+# ИНИЦИАЛИЗАЦИЯ БАЗЫ
 @app.route('/init-db')
 def init_db():
     with app.app_context():
         db.create_all()
         return '✅ База данных создана!'
 
+# ТЕСТОВЫЙ МАРШРУТ (МОЖНО УДАЛИТЬ ПОТОМ)
+@app.route('/test-product')
+def test_product():
+    product = Product.query.first()
+    if product:
+        return f"Первый товар в базе: {product.name} (slug: {product.slug})"
+    else:
+        return "В базе нет товаров. Добавь через админку."
+
+# ЗАПУСК
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-    @app.route('/test-product')
-def test_product():
-    from models import Product
-    with app.app_context():
-        product = Product.query.first()
-        if product:
-            return f"Товар есть: {product.name}"
-        else:
-            return "Товаров нет в базе"
