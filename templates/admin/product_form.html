@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if product %}Редактировать{% else %}Добавить{% endif %} товар</title>
+    <style>
+        body { font-family: Arial; background: #f5f0e7; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; }
+        input, textarea, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; }
+        .btn { background: #6b2e3a; color: white; padding: 12px 20px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{% if product %}Редактировать{% else %}Добавить{% endif %} товар</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Название" value="{{ product.name if product else '' }}" required>
+            <input type="text" name="slug" placeholder="URL (например oxford-navy)" value="{{ product.slug if product else '' }}" required>
+            <input type="number" name="price" placeholder="Цена в рублях" value="{{ product.price if product else '' }}" required>
+            <select name="category" required>
+                <option value="oxford" {% if product and product.category == 'oxford' %}selected{% endif %}>Oxford</option>
+                <option value="zipneck" {% if product and product.category == 'zipneck' %}selected{% endif %}>Zip Neck</option>
+            </select>
+            <input type="text" name="color" placeholder="Цвет" value="{{ product.color if product else '' }}" required>
+            <textarea name="material" placeholder="Материал" rows="2">{{ product.material if product else '' }}</textarea>
+            <textarea name="description" placeholder="Описание" rows="4">{{ product.description if product else '' }}</textarea>
+            <input type="file" name="image" accept="image/*" {% if not product %}required{% endif %}>
+            <button type="submit" class="btn">Сохранить товар</button>
+        </form>
+    </div>
+</body>
+</html>
