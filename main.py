@@ -153,3 +153,12 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+    @app.route('/test-product')
+def test_product():
+    from models import Product
+    with app.app_context():
+        product = Product.query.first()
+        if product:
+            return f"Товар есть: {product.name}"
+        else:
+            return "Товаров нет в базе"
