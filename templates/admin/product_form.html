@@ -16,10 +16,12 @@
             <input type="text" name="name" placeholder="Название" value="{{ product.name if product else '' }}" required>
             <input type="text" name="slug" placeholder="URL (например oxford-navy)" value="{{ product.slug if product else '' }}" required>
             <input type="number" name="price" placeholder="Цена в рублях" value="{{ product.price if product else '' }}" required>
+            
             <select name="category" required>
-                <option value="oxford" {% if product and product.category == 'oxford' %}selected{% endif %}>Oxford</option>
-                <option value="zipneck" {% if product and product.category == 'zipneck' %}selected{% endif %}>Zip Neck</option>
+                <option value="shirt" {% if product and product.category == 'shirt' %}selected{% endif %}>Shirt</option>
+                <option value="sportswear" {% if product and product.category == 'sportswear' %}selected{% endif %}>Sportswear</option>
             </select>
+            
             <input type="text" name="color" placeholder="Цвет" value="{{ product.color if product else '' }}" required>
             <textarea name="material" placeholder="Материал" rows="2">{{ product.material if product else '' }}</textarea>
             <textarea name="description" placeholder="Описание" rows="4">{{ product.description if product else '' }}</textarea>
