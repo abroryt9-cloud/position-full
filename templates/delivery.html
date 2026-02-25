@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Delivery & Payment{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="font-size: 3rem; margin: 60px 0 30px;">Delivery & Payment</h1>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin: 60px 0;">
+        <div>
+            <h2>Shipping</h2>
+            <p style="margin: 20px 0;">We ship worldwide via express courier services. All orders are tracked and insured.</p>
+            <ul style="list-style: none; padding: 0; margin: 20px 0;">
+                <li style="padding: 10px 0;">🇷🇺 Russia — 2–3 business days (free over 20,000 ₽)</li>
+                <li style="padding: 10px 0;">🇪🇺 Europe — 3–5 business days ($15)</li>
+                <li style="padding: 10px 0;">🇺🇸 USA — 4–6 business days ($20)</li>
+                <li style="padding: 10px 0;">🌍 Other countries — 5–10 business days ($25)</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Payment</h2>
+            <ul style="list-style: none; padding: 0; margin: 20px 0;">
+                <li style="padding: 10px 0;">💳 Visa / Mastercard (via Crossmint)</li>
+                <li style="padding: 10px 0;">₿ USDT / USDC (via NOWPayments — directly to our wallet)</li>
+            </ul>
+            <p>Crypto payments are processed instantly with 1% fee. No KYC required — money goes straight to our Phantom wallet.</p>
+        </div>
+    </div>
+
+    <div style="margin: 60px 0;">
+        <h2>Returns</h2>
+        <p style="margin: 20px 0;">14-day return policy. Items must be unworn, with tags attached. Return shipping is free within Russia.</p>
+        <p>To initiate a return, contact our assistant via Telegram: <a href="https://t.me/positionmanual_RU" target="_blank">@positionmanual_RU</a></p>
+    </div>
+</div>
+{% endblock %}
