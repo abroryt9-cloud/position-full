@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POSITION - {% block title %}Premium Menswear{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="/" class="logo">POSITION <span>— since 2026</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="/catalog">CATALOG</a></li>
+                        <li><a href="/manual">MANUAL</a></li>
+                        <li><a href="/about">ABOUT</a></li>
+                        <li><a href="/delivery">DELIVERY</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="logo" style="font-size: 24px;">POSITION</div>
+            <div class="footer-links">
+                <a href="/catalog">CATALOG</a>
+                <a href="/manual">MANUAL</a>
+                <a href="/about">ABOUT</a>
+                <a href="/delivery">DELIVERY</a>
+            </div>
+            <p>© 2026 POSITION. Position Is Earned, Not Given.</p>
+        </div>
+    </footer>
+
+    <a href="https://t.me/positionmanual_RU" target="_blank" class="help-button">
+        ?
+        <span>Ask assistant</span>
+    </a>
+</body>
+</html>
