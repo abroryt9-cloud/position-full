@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Catalog - POSITION{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="font-size: 3rem; margin: 60px 0 30px;">Catalog</h1>
+    
+    <div style="margin-bottom: 40px;">
+        <a href="/catalog?category=all" class="btn">All</a>
+        <a href="/catalog?category=oxford" class="btn">Oxford</a>
+        <a href="/catalog?category=zipneck" class="btn">Zip Neck</a>
+    </div>
+    
+    <div class="products-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <a href="/product/{{ product.slug }}">
+                <img src="{% if product.image %}{{ url_for('uploaded_file', filename=product.image) }}{% else %}https://via.placeholder.com/500x600?text=POSITION{% endif %}" alt="{{ product.name }}">
+                <h3>{{ product.name }}</h3>
+                <p class="product-color">{{ product.color }}</p>
+                <p class="price">${{ product.price_usd }}</p>
+            </a>
+        </div>
+        {% else %}
+        <p style="grid-column: 1/-1; text-align: center;">No products yet. Add them in admin panel.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
