@@ -1,5 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head><title>POSITION</title></head>
-<body><h1>POSITION работает!</h1></body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Premium Menswear{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center;">
+        <div>
+            <h1 style="font-size: 4rem; margin-bottom: 20px;">Position Is Earned,<br>Not Given</h1>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px;">
+                For those who have already taken their position in life but continue to improve. 
+                Quiet confidence. No visible logos.
+            </p>
+            <a href="/catalog" class="btn">Explore collection</a>
+        </div>
+    </div>
+
+    <section style="margin: 100px 0;">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 60px;">New Arrivals</h2>
+        <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <a href="/product/{{ product.slug }}">
+                    <img src="{% if product.image %}{{ url_for('uploaded_file', filename=product.image) }}{% else %}https://via.placeholder.com/500x600?text=POSITION{% endif %}" alt="{{ product.name }}">
+                    <h3>{{ product.name }}</h3>
+                    <p class="product-color">{{ product.color }}</p>
+                    <p class="price">${{ product.price_usd }}</p>
+                </a>
+            </div>
+            {% else %}
+            <p style="text-align: center; grid-column: 1/-1;">Collection coming soon.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section style="margin: 100px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+        <div>
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">POSITION MANUAL</h2>
+            <p style="margin-bottom: 30px; font-size: 1.1rem;">
+                Follow how the clothing appears: from sketch to your wardrobe. 
+                The process, the materials, the details. Every piece tells a story.
+            </p>
+            <a href="/manual" class="btn">Read the manual</a>
+        </div>
+        <div>
+            <img src="https://images.unsplash.com/photo-1586363104862-3a5e2ab60d6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; border-radius: 8px;">
+        </div>
+    </section>
+
+    <section style="margin: 100px 0; text-align: center;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 30px;">Quiet Competence</h2>
+        <p style="max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
+            No logos on the outside. Recognition through cut, fabric, details. 
+            Luxury in the unseen: French seams, mother-of-pearl buttons with POSITION engraving, 
+            silk lining with unique pattern — only visible to the owner.
+        </p>
+    </section>
+
+    <section style="margin: 100px 0; text-align: center; background-color: rgba(44,30,26,0.02); padding: 60px;">
+        <h2 style="font-size: 2rem; margin-bottom: 20px;">Be the first to know</h2>
+        <p style="margin-bottom: 30px;">New collections, MANUAL updates, and private viewings.</p>
+        <form action="/subscribe" method="POST" style="max-width: 500px; margin: 0 auto; display: flex; gap: 10px;">
+            <input type="email" name="email" placeholder="Your email" required style="flex: 1; padding: 15px; border: 1px solid #2C1E1A; background: transparent;">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+    </section>
+</div>
+{% endblock %}
